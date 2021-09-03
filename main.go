@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber"
 	"github.com/hesahesa/materi-rakamin-e2e-crud/model"
 	"github.com/hesahesa/materi-rakamin-e2e-crud/repository"
-	"github.com/hesahesa/materi-rakamin-e2e-crud/router"
+	"github.com/hesahesa/materi-rakamin-e2e-crud/handler"
 	"github.com/hesahesa/materi-rakamin-e2e-crud/service"
 	"gorm.io/gorm"
 	"gorm.io/driver/mysql"
@@ -47,13 +47,14 @@ func main() {
 	}
 	bookService := service.BookService{
 		BookRepo: bookRepo,
+		Name: "namaku",
 	}
-	bookRouter := router.BookRouter{
+	bookHandler := handler.BookHandler{
 		BookService: bookService,
 	}
 
-	app.Get("/book", bookRouter.GetBooks)
-	app.Post("/book", bookRouter.InsertBook)
+	app.Get("/book", bookHandler.GetBooks)
+	app.Post("/book", bookHandler.InsertBook)
 
 	app.Listen(3000)
 }

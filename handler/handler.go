@@ -1,4 +1,4 @@
-package router
+package handler
 
 import (
 	"github.com/gofiber/fiber"
@@ -6,11 +6,11 @@ import (
 	"github.com/hesahesa/materi-rakamin-e2e-crud/service"
 )
 
-type BookRouter struct {
+type BookHandler struct {
 	BookService service.BookService
 }
 
-func(r *BookRouter) GetBooks(c *fiber.Ctx) {
+func(r *BookHandler) GetBooks(c *fiber.Ctx) {
 	books, err := r.BookService.GetAllBooks()
 
 	if err != nil {
@@ -21,7 +21,7 @@ func(r *BookRouter) GetBooks(c *fiber.Ctx) {
 	c.JSON(books)
 }
 
-func(r *BookRouter) InsertBook(c *fiber.Ctx) {
+func(r *BookHandler) InsertBook(c *fiber.Ctx) {
 	book := &model.Book{}
 
 	if err := c.BodyParser(book); err != nil {

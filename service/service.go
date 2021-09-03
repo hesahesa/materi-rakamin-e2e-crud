@@ -7,6 +7,7 @@ import (
 
 type BookService struct {
 	BookRepo repository.BookRepository
+	Name string
 }
 
 func(s *BookService) GetAllBooks() ([]model.Book, error) {

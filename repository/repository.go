@@ -7,6 +7,7 @@ import (
 
 type BookRepository struct {
 	DB *gorm.DB
+	PhoneNum string
 }
 
 func(r *BookRepository) FindAll() ([]model.Book, error) {
