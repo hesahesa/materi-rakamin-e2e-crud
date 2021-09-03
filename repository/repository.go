@@ -10,7 +10,10 @@ type BookRepository struct {
 }
 
 func(r *BookRepository) FindAll() ([]model.Book, error) {
-	return nil, nil
+	var books []model.Book
+	findResult := r.DB.Find(&books)
+
+	return books, findResult.Error
 }
 
 func(r *BookRepository) FindById(id string) (model.Book, error) {
@@ -18,7 +21,9 @@ func(r *BookRepository) FindById(id string) (model.Book, error) {
 }
 
 func(r *BookRepository) Save(book model.Book) (model.Book, error) {
-	return model.Book{}, nil
+	trx := r.DB.Create(&book)
+
+	return book, trx.Error
 }
 
 func(r *BookRepository) Update(id string, book model.Book) {
